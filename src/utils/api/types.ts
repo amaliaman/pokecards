@@ -11,11 +11,10 @@ export interface ApiResponse<TData> {
   totalCount: number;
 }
 
-export type CreateInfiniteQueryOptions<T> =
-  DefinedInitialDataInfiniteOptions<
-    ApiResponse<T>,
-    Error,
-    InfiniteData<ApiResponse<T>, number>,
-    readonly unknown[],
-    number
-  >;
+export type CreateInfiniteQueryOptions<T> = DefinedInitialDataInfiniteOptions<
+  ApiResponse<T>,
+  Error,
+  InfiniteData<ApiResponse<T>, number>,
+  readonly unknown[],
+  number
+>;

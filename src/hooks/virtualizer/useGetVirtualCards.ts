@@ -16,7 +16,7 @@ const useGetVirtualCards = () => {
     estimateSize: () => 110,
     overscan: 5,
   });
-  
+
   const virtualRows = rowVirtualizer.getVirtualItems();
 
   useEffect(() => {

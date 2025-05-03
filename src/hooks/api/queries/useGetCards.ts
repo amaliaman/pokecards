@@ -4,7 +4,7 @@ import { createInfiniteQuery } from 'utils/api';
 const useGetCards = () => {
   const queryKey = 'cards';
   const requestConfig = { url: 'cards' };
-  
+
   return createInfiniteQuery<Card[]>(queryKey, requestConfig);
 };
 
