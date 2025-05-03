@@ -5,7 +5,7 @@ import { Outlet } from 'react-router';
 
 const AppLayout: FC = () => {
   return (
-    <Container>
+    <Container h="100dvh" py={[4, 4, 6]}>
       <TopBar />
       <Outlet />
     </Container>

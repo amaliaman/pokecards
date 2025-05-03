@@ -6,11 +6,11 @@ import {
   Spacer,
   VStack,
 } from '@chakra-ui/react';
-import RouterLink from 'components/RouterLink';
+import RouterLink from 'components/navigation/links/RouterLink';
 import { type FC, useState } from 'react';
 import { LuMenu, LuX } from 'react-icons/lu';
 import { ColorModeButton } from 'utils/style/color-mode';
-import LogoLink from '../LogoLink';
+import LogoLink from '../links/LogoLink';
 
 const MobileNav: FC = () => {
   const [open, setOpen] = useState(false);

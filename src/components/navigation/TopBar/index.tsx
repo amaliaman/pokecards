@@ -5,7 +5,7 @@ import MobileNav from '../MobileNav';
 
 const TopBar: FC = () => {
   return (
-    <Box mt={[4, 4, 6]} mb={[4, 4, 6]}>
+    <Box mb={[4, 4, 6]}>
       <DesktopNav />
       <MobileNav />
     </Box>

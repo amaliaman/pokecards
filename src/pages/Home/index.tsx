@@ -1,4 +1,4 @@
-import { Alert } from '@chakra-ui/react';
+import ErrorAlert from 'components/ErrorAlert';
 import useGetVirtualCards from 'hooks/virtualizer/useGetVirtualCards';
 import type { FC } from 'react';
 
@@ -17,13 +17,7 @@ const Home: FC = () => {
   return status === 'pending' ? (
     <p>Loading...</p>
   ) : status === 'error' ? (
-    <Alert.Root status={'error'}>
-      <Alert.Indicator />
-      <Alert.Content>
-        <Alert.Title>Error</Alert.Title>
-        <Alert.Description>{error.message}</Alert.Description>
-      </Alert.Content>
-    </Alert.Root>
+    <ErrorAlert errorTitle="Error" errorMessage={error.message} />
   ) : (
     <div
       ref={parentRef}
