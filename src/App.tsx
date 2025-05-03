@@ -1,9 +1,7 @@
-import { Button, HStack } from '@chakra-ui/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import AppLayout from 'components/AppLayout';
-import { ColorModeButton } from 'components/ui/color-mode';
-import { StyleProvider } from 'components/ui/provider';
-import Home from 'pages/Home';
+import { RouterProvider } from 'react-router';
+import { router } from 'utils/router';
+import { StyleProvider } from 'utils/style';
 
 const queryClient = new QueryClient();
 
@@ -11,9 +9,7 @@ const App = () => {
   return (
     <StyleProvider enableSystem={false} enableColorScheme>
       <QueryClientProvider client={queryClient}>
-        <AppLayout>
-          <Home />
-        </AppLayout>
+        <RouterProvider router={router} />
       </QueryClientProvider>
     </StyleProvider>
   );

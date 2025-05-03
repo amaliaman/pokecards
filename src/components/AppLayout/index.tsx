@@ -1,20 +1,13 @@
-import { Button, Container, HStack } from '@chakra-ui/react';
-import { ColorModeButton } from 'components/ui/color-mode';
-import type { FC, ReactNode } from 'react';
+import { Container } from '@chakra-ui/react';
+import TopBar from 'components/navigation/TopBar';
+import type { FC } from 'react';
+import { Outlet } from 'react-router';
 
-interface AppLayoutProps {
-  children: ReactNode;
-}
-
-const AppLayout: FC<AppLayoutProps> = ({ children }) => {
+const AppLayout: FC = () => {
   return (
     <Container>
-      <HStack>
-        <Button>Click me</Button>
-        <Button variant={'ghost'}>Click me</Button>
-        <ColorModeButton />
-      </HStack>
-      {children}
+      <TopBar />
+      <Outlet />
     </Container>
   );
 };

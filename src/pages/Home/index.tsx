@@ -1,5 +1,4 @@
-import { Alert, Button, HStack } from '@chakra-ui/react';
-import { ColorModeButton } from 'components/ui/color-mode';
+import { Alert } from '@chakra-ui/react';
 import useGetVirtualCards from 'hooks/virtualizer/useGetVirtualCards';
 import type { FC } from 'react';
 
@@ -29,13 +28,12 @@ const Home: FC = () => {
     <div
       ref={parentRef}
       style={{
-        height: 'calc(100dvh - 100px)',
+        height: 'calc(100dvh - 200px)',
         width: '100%',
         overflow: 'auto',
         border: '1px solid aqua',
       }}
     >
-
       <div
         style={{
           height: `${rowVirtualizer.getTotalSize()}px`,
