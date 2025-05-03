@@ -1,3 +1,5 @@
+import { Alert, Button, HStack } from '@chakra-ui/react';
+import { ColorModeButton } from 'components/ui/color-mode';
 import useGetVirtualCards from 'hooks/virtualizer/useGetVirtualCards';
 import type { FC } from 'react';
 
@@ -16,7 +18,13 @@ const Home: FC = () => {
   return status === 'pending' ? (
     <p>Loading...</p>
   ) : status === 'error' ? (
-    <span>Error: {error.message}</span>
+    <Alert.Root status={'error'}>
+      <Alert.Indicator />
+      <Alert.Content>
+        <Alert.Title>Error</Alert.Title>
+        <Alert.Description>{error.message}</Alert.Description>
+      </Alert.Content>
+    </Alert.Root>
   ) : (
     <div
       ref={parentRef}
@@ -27,6 +35,7 @@ const Home: FC = () => {
         border: '1px solid aqua',
       }}
     >
+
       <div
         style={{
           height: `${rowVirtualizer.getTotalSize()}px`,
