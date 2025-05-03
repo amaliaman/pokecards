@@ -10,9 +10,9 @@ export const router = createBrowserRouter([
     Component: AppLayout,
     errorElement: <ErrorAlert />,
     children: [
-      { index: true, element: withSuspense(HomeLazy)({}) },
+      { index: true, element: withSuspense(HomeLazy)() },
       { path: 'settings', element: <div>settings</div> },
-      { path: '*', element: withSuspense(NotFoundLazy)({}) },
+      { path: '*', element: withSuspense(NotFoundLazy)() },
     ],
   },
 ]);

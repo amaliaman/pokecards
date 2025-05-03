@@ -1,16 +1,15 @@
 import { Loader } from '@chakra-ui/react';
-import React, { type JSX, Suspense } from 'react';
-
+import { type JSX, Suspense } from 'react';
 /**
  * Higher-order component that wraps the given component with React Suspense,
- * displaying a Chakra UI Loader as a fallback while loading.
+ * displaying a loader as a fallback while the component is loading.
  *
- * @param Component - The component to wrap with suspense handling.
- * @returns The memoized component wrapped in Suspense with a loader fallback.
+ * @param Component - The React component to wrap with Suspense.
+ * @returns A new component that renders the original component within Suspense.
  */
-export const withSuspense = (Component: React.ComponentType) =>
-  React.memo((props: JSX.IntrinsicAttributes) => (
+export const withSuspense =
+  (Component: React.ComponentType) => (props?: JSX.IntrinsicAttributes) => (
     <Suspense fallback={<Loader />}>
       <Component {...props} />
     </Suspense>
-  ));
+  );
