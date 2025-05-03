@@ -1,8 +1,8 @@
 import AppLayout from 'components/AppLayout';
 import ErrorAlert from 'components/ErrorAlert';
-import NotFound from 'components/NotFound';
-import Home from 'pages/Home';
 import { createBrowserRouter } from 'react-router';
+import { HomeLazy, NotFoundLazy } from './lazy';
+import { withSuspense } from './utils';
 
 export const router = createBrowserRouter([
   {
@@ -10,9 +10,9 @@ export const router = createBrowserRouter([
     Component: AppLayout,
     errorElement: <ErrorAlert />,
     children: [
-      { index: true, Component: Home },
+      { index: true, element: withSuspense(HomeLazy)({}) },
       { path: 'settings', element: <div>settings</div> },
-      { path: '*', Component: NotFound },
+      { path: '*', element: withSuspense(NotFoundLazy)({}) },
     ],
   },
 ]);
