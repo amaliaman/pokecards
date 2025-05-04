@@ -5,6 +5,7 @@ import {
   Portal,
   Spacer,
   VStack,
+  useBreakpoint,
 } from '@chakra-ui/react';
 import RouterLink from 'components/navigation/links/RouterLink';
 import { Menu, X } from 'lucide-react';
@@ -19,8 +20,12 @@ const MobileNav: FC = () => {
     setOpen(false);
   };
 
+  const breakpoint = useBreakpoint({ breakpoints: ['sm'] });
+
+  if (breakpoint !== 'base') return null;
+
   return (
-    <HStack hideFrom={'sm'}>
+    <HStack>
       <LogoLink />
 
       <Spacer />

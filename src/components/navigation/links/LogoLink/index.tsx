@@ -7,7 +7,7 @@ import { APP_NAME } from 'utils/constants';
 const LogoLink: FC<Partial<LinkProps>> = (props) => {
   return (
     <Link to="/" {...props}>
-      <HStack>
+      <HStack alignItems="center">
         <Image src={logo} boxSize={9} alt={APP_NAME} />
 
         <Text fontSize="2xl" fontWeight="bold">
