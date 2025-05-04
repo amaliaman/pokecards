@@ -7,8 +7,8 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import RouterLink from 'components/navigation/links/RouterLink';
+import { Menu, X } from 'lucide-react';
 import { type FC, useState } from 'react';
-import { LuMenu, LuX } from 'react-icons/lu';
 import { ColorModeButton } from 'utils/style/color-mode';
 import LogoLink from '../links/LogoLink';
 
@@ -36,7 +36,7 @@ const MobileNav: FC = () => {
 
         <Drawer.Trigger asChild hideFrom="sm">
           <IconButton variant="subtle" size="sm">
-            <LuMenu />
+            <Menu />
           </IconButton>
         </Drawer.Trigger>
 
@@ -45,7 +45,7 @@ const MobileNav: FC = () => {
             <Drawer.Content>
               <Drawer.CloseTrigger asChild top={4} right={4}>
                 <IconButton variant="subtle" size="sm">
-                  <LuX />
+                  <X />
                 </IconButton>
               </Drawer.CloseTrigger>
 

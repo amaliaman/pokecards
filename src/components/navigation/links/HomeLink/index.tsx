@@ -1,12 +1,12 @@
 import { Button } from '@chakra-ui/react';
-import { LuHouse } from 'react-icons/lu';
+import { House } from 'lucide-react';
 import { NavLink } from 'react-router';
 
 const HomeLink = () => {
   return (
     <Button asChild size="sm">
       <NavLink to="/">
-        <LuHouse />
+        <House />
         Go Home
       </NavLink>
     </Button>
