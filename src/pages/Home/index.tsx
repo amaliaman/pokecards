@@ -1,4 +1,6 @@
+import { Grid, GridItem } from '@chakra-ui/react';
 import ErrorAlert from 'components/ErrorAlert';
+import AppGrid from 'components/shared/AppGrid';
 import useGetVirtualCards from 'hooks/virtualizer/useGetVirtualCards';
 import type { FC } from 'react';
 
@@ -14,11 +16,12 @@ const Home: FC = () => {
     allRows,
   } = useGetVirtualCards();
 
-  return status === 'pending' ? (
-    <p>Loading...</p>
-  ) : status === 'error' ? (
-    <ErrorAlert errorTitle="Error" errorMessage={error.message} />
-  ) : (
+  if (status === 'pending') return <p>Loading...</p>;
+
+  if (status === 'error')
+    return <ErrorAlert errorTitle="Error" errorMessage={error.message} />;
+
+  return (
     <div
       ref={parentRef}
       style={{
@@ -36,7 +39,59 @@ const Home: FC = () => {
           border: '1px solid hotpink',
         }}
       >
-        {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+        <AppGrid
+          items={rowVirtualizer.getVirtualItems().map((virtualRow) => {
+            const isLoaderRow = virtualRow.index > allRows.length - 1;
+            const card = allRows[virtualRow.index];
+
+            return (
+              <GridItem
+                key={virtualRow.index}
+                borderRadius={'8px'}
+                padding={2}
+                bgColor={'whitesmoke'}
+                maxH="100%"
+                // className={virtualRow.index % 2 ? 'ListItemOdd' : 'ListItemEven'}
+                // style={{
+                // position: 'absolute',
+                // top: 0,
+                // left: 0,
+                // width: '100%',
+                // height: `${virtualRow.size}px`,
+                // transform: `translateY(${virtualRow.start}px)`,
+                // border: '1px solid blue',
+                // borderRadius: '8px',
+                // padding: '8px',
+                // backgroundColor: 'whitesmoke',
+                // }}
+              >
+                {isLoaderRow ? (
+                  hasNextPage ? (
+                    'Loading more...'
+                  ) : (
+                    'Nothing more to load'
+                  )
+                ) : (
+                  // <div
+                  //   key={card.id}
+                  //   style={{ display: 'inline', margin: '10px' }}
+                  // >
+                  <>
+                    <img
+                      src={card.images.large}
+                      alt={card.name}
+                      style={{ maxHeight: '80%' }}
+                    />
+                    <b>{card.name}</b>
+                  </>
+                  // </div>
+                )}
+              </GridItem>
+            );
+          })}
+        />
+
+        {/* {rowVirtualizer.getVirtualItems().map((virtualRow) => {
           const isLoaderRow = virtualRow.index > allRows.length - 1;
           const card = allRows[virtualRow.index];
 
@@ -75,7 +130,7 @@ const Home: FC = () => {
               )}
             </div>
           );
-        })}
+        })} */}
       </div>
 
       <div>

@@ -13,7 +13,7 @@ const useGetVirtualCards = () => {
   const rowVirtualizer = useVirtualizer({
     count: hasNextPage ? allRows.length + 1 : allRows.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 110,
+    estimateSize: () => 130,
     overscan: 5,
   });
 
@@ -21,16 +21,20 @@ const useGetVirtualCards = () => {
 
   useEffect(() => {
     const [lastItem] = [...virtualRows].reverse();
+console.log(111);
 
     if (!lastItem) {
       return;
     }
+console.log(222);
 
     if (
       lastItem.index >= allRows.length - 1 &&
       hasNextPage &&
       !isFetchingNextPage
     ) {
+      console.log('fetching next page');
+    
       fetchNextPage();
     }
   }, [
