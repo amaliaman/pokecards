@@ -1,3 +1,5 @@
+import RouterLink from '@/components/navigation/links/RouterLink';
+import { ColorModeButton } from '@/utils/style/color-mode';
 import {
   Drawer,
   HStack,
@@ -7,10 +9,8 @@ import {
   VStack,
   useBreakpoint,
 } from '@chakra-ui/react';
-import RouterLink from 'components/navigation/links/RouterLink';
 import { Menu, X } from 'lucide-react';
 import { type FC, useState } from 'react';
-import { ColorModeButton } from 'utils/style/color-mode';
 import LogoLink from '../links/LogoLink';
 
 const MobileNav: FC = () => {

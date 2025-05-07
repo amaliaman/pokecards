@@ -1,7 +1,6 @@
-import { Grid, GridItem } from '@chakra-ui/react';
-import ErrorAlert from 'components/ErrorAlert';
-import AppGrid from 'components/shared/AppGrid';
-import useGetVirtualCards from 'hooks/virtualizer/useGetVirtualCards';
+import ErrorAlert from '@/components/ErrorAlert';
+import useGetVirtualCards from '@/hooks/virtualizer/useGetVirtualCards';
+import { Box, Grid, GridItem, Image, Spinner, VStack } from '@chakra-ui/react';
 import type { FC } from 'react';
 
 const Home: FC = () => {

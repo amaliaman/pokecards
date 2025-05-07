@@ -1,5 +1,5 @@
+import HomeLink from '@/components/navigation/links/HomeLink';
 import { Alert, VStack } from '@chakra-ui/react';
-import HomeLink from 'components/navigation/links/HomeLink';
 import type { FC } from 'react';
 import { type ErrorResponse, useRouteError } from 'react-router';
 import type { ErrorAlertProps } from './types';

@@ -1,5 +1,5 @@
+import useGetCards from '@/hooks/api/queries/useGetCards';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import useGetCards from 'hooks/api/queries/useGetCards';
 import { useEffect, useRef } from 'react';
 
 const useGetVirtualCards = () => {

@@ -1,8 +1,8 @@
+import logo from '@/assets/icon-512.png';
+import { APP_NAME } from '@/utils/constants';
 import { HStack, Image, Text } from '@chakra-ui/react';
-import logo from 'assets/icon-512.png';
 import type { FC } from 'react';
 import { Link, type LinkProps } from 'react-router';
-import { APP_NAME } from 'utils/constants';
 
 const LogoLink: FC<Partial<LinkProps>> = (props) => {
   return (

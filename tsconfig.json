@@ -21,10 +21,7 @@
 
     "baseUrl": "./src",
     "paths": {
-      "assets/*": ["assets/*"],
-      "hooks/*": ["hooks/*"],
-      "pages/*": ["pages/*"],
-      "utils/*": ["utils/*"]
+      "@/*": ["*"],
     }
   },
   "include": ["src"]

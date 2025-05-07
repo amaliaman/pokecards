@@ -1,3 +1,4 @@
+import { PAGE_SIZE } from '@/hooks/api/constants';
 import {
   type DefinedInitialDataOptions,
   type InfiniteData,
@@ -6,7 +7,6 @@ import {
   useQuery,
 } from '@tanstack/react-query';
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios';
-import { PAGE_SIZE } from 'hooks/api/constants';
 import type { ApiResponse, CreateInfiniteQueryOptions } from './types';
 
 // Define a default instance if none is provided

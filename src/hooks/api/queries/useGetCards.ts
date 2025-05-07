@@ -1,5 +1,5 @@
-import type { Card } from 'models/card';
-import { createInfiniteQuery } from 'utils/api';
+import type { Card } from '@/models/card';
+import { createInfiniteQuery } from '@/utils/api';
 
 const useGetCards = () => {
   const queryKey = 'cards';

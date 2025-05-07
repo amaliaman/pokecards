@@ -1,7 +1,7 @@
+import { router } from '@/utils/router';
+import { StyleProvider } from '@/utils/style';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from 'react-router';
-import { router } from 'utils/router';
-import { StyleProvider } from 'utils/style';
 
 const queryClient = new QueryClient();
 
