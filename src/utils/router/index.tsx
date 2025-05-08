@@ -1,8 +1,8 @@
 import AppLayout from '@/components/AppLayout';
 import ErrorAlert from '@/components/ErrorAlert';
 import { createBrowserRouter } from 'react-router';
-import { HomeLazy, NotFoundLazy } from './lazy';
 import { withSuspense } from './helpers';
+import { HomeLazy, NotFoundLazy } from './lazy';
 
 export const router = createBrowserRouter([
   {

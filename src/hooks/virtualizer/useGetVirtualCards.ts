@@ -1,32 +1,38 @@
 import useGetCards from '@/hooks/api/queries/useGetCards';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { PAGE_SIZE } from '../api/constants';
 
 const useGetVirtualCards = () => {
   const getCards = useGetCards();
   const { data, isFetchingNextPage, fetchNextPage, hasNextPage } = getCards;
 
-  const allRows = data ? data.pages.flatMap((page) => page.data) : [];
+  const allRows = data?.pages.flatMap((page) => page.data) ?? [];
 
   const parentRef = useRef<HTMLDivElement>(null);
+
+  const measureElement = useCallback(
+    (element: HTMLElement) => element.getBoundingClientRect().height,
+    [],
+  );
 
   const rowVirtualizer = useVirtualizer({
     count: hasNextPage ? allRows.length + 1 : allRows.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 130,
+    estimateSize: () => 300,
     overscan: 5,
+    lanes: 3,
+    measureElement,
   });
 
   const virtualRows = rowVirtualizer.getVirtualItems();
 
   useEffect(() => {
     const [lastItem] = [...virtualRows].reverse();
-console.log(111);
 
     if (!lastItem) {
       return;
     }
-console.log(222);
 
     if (
       lastItem.index >= allRows.length - 1 &&
@@ -34,7 +40,7 @@ console.log(222);
       !isFetchingNextPage
     ) {
       console.log('fetching next page');
-    
+
       fetchNextPage();
     }
   }, [

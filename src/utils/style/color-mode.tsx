@@ -1,9 +1,9 @@
 import type { IconButtonProps } from '@chakra-ui/react';
 import { ClientOnly, IconButton, Skeleton } from '@chakra-ui/react';
+import { Moon, Sun } from 'lucide-react';
 import type { ThemeProviderProps } from 'next-themes';
 import { ThemeProvider, useTheme } from 'next-themes';
 import * as React from 'react';
-import { Moon, Sun } from 'lucide-react';
 
 export interface ColorModeProviderProps extends ThemeProviderProps {}
 
