@@ -1,4 +1,5 @@
 import RouterLink from '@/components/navigation/links/RouterLink';
+import useResponsiveValues from '@/hooks/helpers/useResponsiveValues';
 import { ColorModeButton } from '@/utils/style/color-mode';
 import {
   Drawer,
@@ -7,7 +8,6 @@ import {
   Portal,
   Spacer,
   VStack,
-  useBreakpoint,
 } from '@chakra-ui/react';
 import { Menu, X } from 'lucide-react';
 import { type FC, useState } from 'react';
@@ -20,9 +20,8 @@ const MobileNav: FC = () => {
     setOpen(false);
   };
 
-  const breakpoint = useBreakpoint({ breakpoints: ['sm'] });
-
-  if (breakpoint !== 'base') return null;
+  const { currentBreakpoint } = useResponsiveValues();
+  if (currentBreakpoint !== 'base') return null;
 
   return (
     <HStack>
