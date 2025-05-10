@@ -4,7 +4,8 @@ import { Box, Image, Spinner, VStack } from '@chakra-ui/react';
 import type { FC } from 'react';
 import { useMemo } from 'react';
 
-const ITEM_PADDING = 3;
+const ITEM_PADDING = 4;
+export const XXX = 4;
 
 const Home: FC = () => {
   const {
@@ -29,32 +30,19 @@ const Home: FC = () => {
             key={virtualRow.index}
             position="absolute"
             top={0}
-            left={`${virtualRow.lane * (100 / 3)}%`}
-            w={`${100 / 3}%`}
+            left={`${virtualRow.lane * (100 / XXX)}%`}
+            w={`${100 / XXX}%`}
             h={`${virtualRow.size}px`}
             data-index={virtualRow.index}
             ref={rowVirtualizer.measureElement}
             transform={`translateY(${virtualRow.start}px)`}
             pb={
-              Math.floor(virtualRow.index / 3) ===
-              Math.floor(allRows.length / 3)
+              Math.floor(virtualRow.index / XXX) ===
+              Math.floor(allRows.length / XXX)
                 ? 0
-                : ITEM_PADDING * 1.5
+                : ITEM_PADDING
             }
-            pl={
-              virtualRow.lane === 0
-                ? 0
-                : virtualRow.lane === 2
-                  ? ITEM_PADDING
-                  : ITEM_PADDING / 2
-            }
-            pr={
-              virtualRow.lane === 0
-                ? ITEM_PADDING
-                : virtualRow.lane === 2
-                  ? 0
-                  : ITEM_PADDING / 2
-            }
+            pr={ITEM_PADDING}
           >
             {isLoaderRow ? (
               hasNextPage ? (
@@ -92,13 +80,12 @@ const Home: FC = () => {
       ref={parentRef}
       h="calc(100dvh - 200px)"
       w="100%"
-      overflow="auto"
-      border="1px solid aqua"
-      p={ITEM_PADDING * 1.5}
+      overflowY="auto"
+      overflowX="hidden"
     >
       <Box
         h={`${rowVirtualizer.getTotalSize()}px`}
-        w="100%"
+        w={`calc(100% + {spacing.${ITEM_PADDING}})`}
         position="relative"
       >
         {memoizedVirtualRows}
