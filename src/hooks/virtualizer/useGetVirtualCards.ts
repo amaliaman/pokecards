@@ -1,10 +1,11 @@
 import useGetCards from '@/hooks/api/queries/useGetCards';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
-import { PAGE_SIZE } from '../api/constants';
-import { XXX } from '@/pages/Home';
+import { useCallback, useEffect, useRef } from 'react';
+import useResponsiveValues from '../helpers/useResponsiveValues';
 
 const useGetVirtualCards = () => {
+  const { gridColumns } = useResponsiveValues();
+
   const getCards = useGetCards();
   const { data, isFetchingNextPage, fetchNextPage, hasNextPage } = getCards;
 
@@ -21,8 +22,8 @@ const useGetVirtualCards = () => {
     count: hasNextPage ? allRows.length + 1 : allRows.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 300,
-    overscan: XXX,
-    lanes: XXX,
+    overscan: gridColumns,
+    lanes: gridColumns,
     measureElement,
   });
 

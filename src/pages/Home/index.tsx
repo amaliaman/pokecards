@@ -1,13 +1,15 @@
 import ErrorAlert from '@/components/ErrorAlert';
+import useResponsiveValues from '@/hooks/helpers/useResponsiveValues';
 import useGetVirtualCards from '@/hooks/virtualizer/useGetVirtualCards';
 import { Box, Image, Spinner, VStack } from '@chakra-ui/react';
 import type { FC } from 'react';
 import { useMemo } from 'react';
 
 const ITEM_PADDING = 4;
-export const XXX = 4;
 
 const Home: FC = () => {
+  const { gridColumns } = useResponsiveValues();
+
   const {
     status,
     error,
@@ -30,15 +32,15 @@ const Home: FC = () => {
             key={virtualRow.index}
             position="absolute"
             top={0}
-            left={`${virtualRow.lane * (100 / XXX)}%`}
-            w={`${100 / XXX}%`}
+            left={`${virtualRow.lane * (100 / gridColumns)}%`}
+            w={`${100 / gridColumns}%`}
             h={`${virtualRow.size}px`}
             data-index={virtualRow.index}
             ref={rowVirtualizer.measureElement}
             transform={`translateY(${virtualRow.start}px)`}
             pb={
-              Math.floor(virtualRow.index / XXX) ===
-              Math.floor(allRows.length / XXX)
+              Math.floor(virtualRow.index / gridColumns) ===
+              Math.floor(allRows.length / gridColumns)
                 ? 0
                 : ITEM_PADDING
             }
@@ -67,7 +69,7 @@ const Home: FC = () => {
           </Box>
         );
       }),
-    [rowVirtualizer, allRows, hasNextPage],
+    [rowVirtualizer, allRows, hasNextPage, gridColumns],
   );
 
   if (status === 'pending') return <p>Loading...</p>;
