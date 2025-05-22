@@ -1,5 +1,4 @@
 import ErrorAlert from '@/components/ErrorAlert';
-import useResponsiveValues from '@/hooks/helpers/useResponsiveValues';
 import useGetVirtualCards from '@/hooks/virtualizer/useGetVirtualCards';
 import { Box, Image, Spinner, VStack } from '@chakra-ui/react';
 import type { FC } from 'react';
@@ -8,8 +7,6 @@ import { useMemo } from 'react';
 const ITEM_PADDING = 4;
 
 const Home: FC = () => {
-  const { gridColumns } = useResponsiveValues();
-
   const {
     status,
     error,
@@ -17,36 +14,37 @@ const Home: FC = () => {
     parentRef,
     hasNextPage,
     isFetchingNextPage,
-    rowVirtualizer,
-    allRows,
+    itemVirtualizer,
+    allItems,
   } = useGetVirtualCards();
 
-  const memoizedVirtualRows = useMemo(
+  const memoizedVirtualItems = useMemo(
     () =>
-      rowVirtualizer.getVirtualItems().map((virtualRow) => {
-        const isLoaderRow = virtualRow.index > allRows.length - 1;
-        const card = allRows[virtualRow.index];
+      itemVirtualizer.getVirtualItems().map((virtualItem) => {
+        const isLoaderItem = virtualItem.index > allItems.length - 1;
+        const card = allItems[virtualItem.index];
+        const { lanes } = itemVirtualizer.options;
 
         return (
           <Box
-            key={virtualRow.index}
+            key={virtualItem.index}
             position="absolute"
             top={0}
-            left={`${virtualRow.lane * (100 / gridColumns)}%`}
-            w={`${100 / gridColumns}%`}
-            h={`${virtualRow.size}px`}
-            data-index={virtualRow.index}
-            ref={rowVirtualizer.measureElement}
-            transform={`translateY(${virtualRow.start}px)`}
+            left={`${virtualItem.lane * (100 / lanes)}%`}
+            w={`${100 / lanes}%`}
+            h={`${virtualItem.size}px`}
+            data-index={virtualItem.index}
+            ref={itemVirtualizer.measureElement}
+            transform={`translateY(${virtualItem.start}px)`}
             pb={
-              Math.floor(virtualRow.index / gridColumns) ===
-              Math.floor(allRows.length / gridColumns)
+              Math.floor(virtualItem.index / lanes) ===
+              Math.floor(allItems.length / lanes)
                 ? 0
                 : ITEM_PADDING
             }
             pr={ITEM_PADDING}
           >
-            {isLoaderRow ? (
+            {isLoaderItem ? (
               hasNextPage ? (
                 <Spinner />
               ) : (
@@ -69,7 +67,7 @@ const Home: FC = () => {
           </Box>
         );
       }),
-    [rowVirtualizer, allRows, hasNextPage, gridColumns],
+    [itemVirtualizer, allItems, hasNextPage],
   );
 
   if (status === 'pending') return <p>Loading...</p>;
@@ -86,11 +84,11 @@ const Home: FC = () => {
       overflowX="hidden"
     >
       <Box
-        h={`${rowVirtualizer.getTotalSize()}px`}
+        h={`${itemVirtualizer.getTotalSize()}px`}
         w={`calc(100% + {spacing.${ITEM_PADDING}})`}
         position="relative"
       >
-        {memoizedVirtualRows}
+        {memoizedVirtualItems}
       </Box>
 
       <div>

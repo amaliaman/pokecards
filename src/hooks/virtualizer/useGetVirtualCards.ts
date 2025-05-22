@@ -9,7 +9,7 @@ const useGetVirtualCards = () => {
   const getCards = useGetCards();
   const { data, isFetchingNextPage, fetchNextPage, hasNextPage } = getCards;
 
-  const allRows = data?.pages.flatMap((page) => page.data) ?? [];
+  const allItems = data?.pages.flatMap((page) => page.data) ?? [];
 
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -18,8 +18,8 @@ const useGetVirtualCards = () => {
     [],
   );
 
-  const rowVirtualizer = useVirtualizer({
-    count: hasNextPage ? allRows.length + 1 : allRows.length,
+  const itemVirtualizer = useVirtualizer({
+    count: hasNextPage ? allItems.length + 1 : allItems.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 300,
     overscan: gridColumns,
@@ -27,17 +27,22 @@ const useGetVirtualCards = () => {
     measureElement,
   });
 
-  const virtualRows = rowVirtualizer.getVirtualItems();
+  const virtualItems = itemVirtualizer.getVirtualItems();
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: recalculate the row size when gridColumns changes
+  useEffect(() => {
+    itemVirtualizer.measure();
+  }, [gridColumns, itemVirtualizer]);
 
   useEffect(() => {
-    const [lastItem] = [...virtualRows].reverse();
+    const [lastItem] = [...virtualItems].reverse();
 
     if (!lastItem) {
       return;
     }
 
     if (
-      lastItem.index >= allRows.length - 1 &&
+      lastItem.index >= allItems.length - 1 &&
       hasNextPage &&
       !isFetchingNextPage
     ) {
@@ -48,12 +53,12 @@ const useGetVirtualCards = () => {
   }, [
     hasNextPage,
     fetchNextPage,
-    allRows.length,
+    allItems.length,
     isFetchingNextPage,
-    virtualRows,
+    virtualItems,
   ]);
 
-  return { ...getCards, rowVirtualizer, allRows, parentRef };
+  return { ...getCards, itemVirtualizer, allItems, parentRef };
 };
 
 export default useGetVirtualCards;

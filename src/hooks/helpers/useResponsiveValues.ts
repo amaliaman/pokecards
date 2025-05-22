@@ -18,8 +18,8 @@ const values: Record<Breakpoint, ResponsiveValues> = {
 const fallbackBreakpoint: Breakpoint = 'base';
 
 /**
- * Custom hook to get responsive grid column values based on the current Chakra UI breakpoint.
- * Returns the current breakpoint and the corresponding grid column configuration.
+ * Custom hook to get responsive values based on the current Chakra UI breakpoint.
+ * Returns the current breakpoint and the corresponding configuration.
  *
  * @returns {ResponsiveValues & { currentBreakpoint: Breakpoint }}
  */
